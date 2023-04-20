@@ -2,8 +2,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Scanner;
 
 public class FileReader {
+
+    public static String readPath() {
+        System.out.println("Enter path to the file to count its keys: ");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
 
     enum Format {
         XML,
@@ -27,14 +34,19 @@ public class FileReader {
         }
     }
 
-    public static Format detectFormat(String input) {
-        Format format = null;
-        // blabla определяем input здесь
-        // если XML, inputFormat = XML
-        // если JSON, inputFormat = JSON
-        // если PROTOBUFFER = PROTOBUFFER
+    public static Format detectFormat(String path) {
+        try {
+            String format = "";
 
-        return format;
+            if (path != null) {
+                int lastDotIndex = path.lastIndexOf(".");
+                format = path.substring(lastDotIndex + 1);
+            }
+
+            return Format.valueOf(format.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
