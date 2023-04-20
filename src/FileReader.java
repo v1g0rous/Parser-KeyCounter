@@ -6,8 +6,13 @@ import java.util.Scanner;
 
 public class FileReader {
 
+    public static final String PATH_CANNOT_BE_NULL = "Path cannot be null";
+    public static final String PATH_MISSING_EXTENSION = "Path does not have an extension";
+    public static final String UNKNOWN_FILE_EXTENSION = "Unknown file extension";
+    public static final String ENTER_FILE_PATH = "Enter path to the file to count its keys, e.g. .\\test.txt: ";
+
     public static String readPath() {
-        System.out.println("Enter path to the file to count its keys: ");
+        System.out.println(ENTER_FILE_PATH);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
@@ -15,39 +20,45 @@ public class FileReader {
     enum Format {
         XML,
         JSON,
-        PROTOBUFFER
+        PROTO
     }
 
-    public static String readFile() throws IOException {
-        try {
-            StringBuilder content = new StringBuilder();
-            String path = ".\\test.txt";
+    public static String readFile(String path) throws IOException {
+        StringBuilder content = new StringBuilder();
+        if (path == null) {
+            throw new IllegalArgumentException(PATH_CANNOT_BE_NULL);
+        }
 
+        try {
             List<String> lines = Files.readAllLines(Path.of(path));
             for (String line : lines) {
                 content.append(line);
             }
 
-            return content.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return content.toString();
     }
 
     public static Format detectFormat(String path) {
+
+        if (path == null) {
+            throw new IllegalArgumentException(PATH_CANNOT_BE_NULL);
+        }
+
+        int lastDotIndex = path.lastIndexOf(".");
+
+        if (lastDotIndex == -1) {
+            throw new IllegalArgumentException(PATH_MISSING_EXTENSION);
+        }
+
         try {
-            String format = "";
-
-            if (path != null) {
-                int lastDotIndex = path.lastIndexOf(".");
-                format = path.substring(lastDotIndex + 1);
-            }
-
-            return Format.valueOf(format.toUpperCase());
+            String extension = path.substring(lastDotIndex + 1);
+            return Format.valueOf(extension.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(UNKNOWN_FILE_EXTENSION);
         }
     }
-
 
 }
