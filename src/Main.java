@@ -1,15 +1,20 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String input = FileReader.readFile();
-        FileReader.Format format = FileReader.detectFormat(input);
+        String path = FileReader.readPath();
+        FileReader.Format format = FileReader.detectFormat(path);
 
-        switch (format) {
-            case XML -> new XmlParser().countKeys(input);
-            case JSON -> new JsonParser().countKeys(input);
-            case PROTOBUFFER -> new ProtobufParser().countKeys(input);
+        if (format != null) {
+            String input = FileReader.readFile(path);
+            switch (format) {
+                case XML -> new XmlParser().countKeys(input);
+                case JSON -> new JsonParser().countKeys(input);
+                case PROTO -> new ProtobufParser().countKeys(input);
+            }
         }
+
     }
 
 }

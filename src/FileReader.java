@@ -9,7 +9,7 @@ public class FileReader {
     public static final String PATH_CANNOT_BE_NULL = "Path cannot be null";
     public static final String PATH_MISSING_EXTENSION = "Path does not have an extension";
     public static final String UNKNOWN_FILE_EXTENSION = "Unknown file extension";
-    public static final String ENTER_FILE_PATH = "Enter path to the file to count its keys, e.g. .\\test.txt: ";
+    public static final String ENTER_FILE_PATH = "Enter path to the file to count its keys, (e.g. .\\test.txt):";
 
     public static String readPath() {
         System.out.println(ENTER_FILE_PATH);
