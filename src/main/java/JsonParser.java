@@ -1,4 +1,5 @@
-public class ProtobufParser extends Parser{
+
+public class JsonParser extends Parser {
     public String countKeys(String input) {
         return new String();
     }

@@ -23,7 +23,7 @@ public class FileReader {
         PROTO
     }
 
-    public static String readFile(String path) throws IOException {
+    public static String readFile(String path) {
         StringBuilder content = new StringBuilder();
         if (path == null) {
             throw new IllegalArgumentException(PATH_CANNOT_BE_NULL);
