@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.IOException;
 
 abstract public class Parser {
     int keyNumber;
@@ -5,6 +7,6 @@ abstract public class Parser {
     public void printKeyNumber() {
         System.out.println(keyNumber);
     }
-    abstract String countKeys(String input);
+    abstract void countKeys(File file) throws IOException;
 
 }

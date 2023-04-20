@@ -1,6 +1,6 @@
+import java.io.File;
 
 public class XmlParser extends Parser{
-    public String countKeys(String input) {
-        return new String();
+    public void countKeys(File file) {
     }
 }

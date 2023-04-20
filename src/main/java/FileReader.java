@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +16,11 @@ public class FileReader {
         System.out.println(ENTER_FILE_PATH);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    public static File getFile(String path) {
+        File file = new File(path);
+        return file;
     }
 
     enum Format {

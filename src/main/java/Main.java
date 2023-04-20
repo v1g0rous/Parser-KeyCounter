@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 
 public class Main {
@@ -6,11 +7,11 @@ public class Main {
         FileReader.Format format = FileReader.detectFormat(path);
 
         if (format != null) {
-            String input = FileReader.readFile(path);
+            File file = FileReader.getFile(path);
             switch (format) {
-                case XML -> new XmlParser().countKeys(input);
-                case JSON -> new JsonParser().countKeys(input);
-                case PROTO -> new ProtobufParser().countKeys(input);
+                case XML -> new XmlParser().countKeys(file);
+                case JSON -> new JsonParser().countKeys(file);
+                case PROTO -> new ProtobufParser().countKeys(file);
             }
         }
 
